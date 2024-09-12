@@ -50,7 +50,7 @@ SECTIONS
       . = ALIGN(4);
       _edata = .;                 /* define a global symbol at data end */
   } >RAM AT> FLASH
-  _data_loadaddr = LOADADDR(.data);
+  _flash_sdata = LOADADDR(.data);
 
   /* Uninitialized data section */
   .bss :
