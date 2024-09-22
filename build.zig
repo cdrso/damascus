@@ -18,16 +18,24 @@ pub fn build(b: *std.Build) void {
         .optimize = optimize,
     });
 
+    // CMSIS module
+    const device_module = b.addModule("device", .{
+        .root_source_file = b.path("src/device/stm32h753.zig"),
+    });
+
+    // Add CMSIS module
+    exe.root_module.addImport("device", device_module);
+
     // main() is an exported symbol, not an import
-    const main_object = b.addObject(.{
-        .name = "main.o",
+    const application = b.addObject(.{
+        .name = "app.o",
         .root_source_file = b.path("src/app/main.zig"),
         .target = b.resolveTargetQuery(target),
         .optimize = optimize,
     });
 
     // Add application program
-    exe.addObject(main_object);
+    exe.addObject(application);
 
     // Add vector table
     exe.addAssemblyFile(b.path("src/boot/vector_table.s"));
