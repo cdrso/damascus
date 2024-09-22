@@ -1,4 +1,6 @@
 # TODO list
+- [x] svd parser for device code generation
+- [] On boot initial clock, mpu and fpu config before calling main
 
-- [] Implement clock init logic
+...
 - [] Implement `Systick_Handler` for Context switching
